@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import  { useEffect } from 'react';
 import { addRipple } from './rippleManager';  // Import the addRipple function
 
 export default function Ripple() {

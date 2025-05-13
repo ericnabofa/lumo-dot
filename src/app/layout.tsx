@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope, Gaegu } from 'next/font/google'
 import "./globals.css";
-import { ColorSchemeProvider } from '@/components/ColorSchemeProvider';
 import ReactiveDotWrapper from '@/components/ReactiveDotWrapper';
 
 export const manrope = Manrope({ subsets: ['latin'] })
