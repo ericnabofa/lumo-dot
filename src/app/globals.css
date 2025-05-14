@@ -1,12 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-* {
-  box-sizing: border-box;
+:root {
+  --lumo-primary: #43C8FF;
+  --lumo-yellow: #FFF04D;
 }
 
 html, body {
@@ -14,198 +12,127 @@ html, body {
   width: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  font-family: 'Manrope', sans-serif;
+  background-color: var(--lumo-primary);
+  color: white;
+  overflow-x: hidden;
+  overflow-y: auto; /* ✅ Allow vertical scrolling */
 }
 
 .main-container {
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
-  position: relative;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   background-color: transparent;
+  position: relative;
 }
 
-.logo-position {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 75px;
-  width: 93px;
-}
-
-.heading-position {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 223.3px;
-  width: 981px;
-}
-
-.subheading-position {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 393.3px;
-  width: 974px;
-}
-
-@keyframes jiggle-bounce {
-  0%, 100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
-  25% { transform: translateX(-52%) translateY(5px) rotate(-2deg); }
-  75% { transform: translateX(-48%) translateY(5px) rotate(2deg); }
-  50% { transform: translateX(-50%) translateY(10px) rotate(0deg); }
-}
-
-.arrow-position {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 460px;
-  height: 140px;
-  display: flex;
-  align-items: center;
-  animation: jiggle-bounce 2s ease-in-out infinite;
-  pointer-events: none;
-}
-
-.waitlist-position {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 620px;
-  width: 598px;
-  z-index: 1;
-}
-
-@keyframes line-wiggle {
-  0%, 100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
-  25% { transform: translateX(-51%) translateY(-5px) rotate(-1deg); }
-  75% { transform: translateX(-49%) translateY(-5px) rotate(1deg); }
-  50% { transform: translateX(-50%) translateY(-8px) rotate(0deg); }
-}
-
-.line-position {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 530px;
-  height: 420px;
-  display: flex;
-  align-items: center;
-  animation: line-wiggle 4s ease-in-out infinite;
-  pointer-events: none;
-}
-
-
-.footer-position {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 780px;
-  width: 930px;
-  height: 113px;
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 28px;
-  line-height: 40px;
-  text-align: center;
-  color: #FFFBEB;
-}
-
+/* Typography */
 .headline {
   font-family: 'Gaegu', cursive;
-  font-size: 100px;
-  font-weight: 400;
-  line-height: 125px;
-  text-align: center;
-  color: #FFFBEB;
-  margin-bottom: 24px;
+  font-size: 8vw;
+  line-height: 1.1;
+  margin-bottom: 1rem;
 }
-
 .subheadline {
   font-family: 'Manrope', sans-serif;
-  font-size: 49px;
-  line-height: 67px;
+  font-size: 5vw;
   font-weight: 600;
-  text-align: center;
-  color: #FFFBEB;
-  margin: 20px auto;
-  max-width: 974px;
+  line-height: 1.4;
+  margin-bottom: 2rem;
+}
+.footer {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  font-weight: 400;
+  max-width: 700px;
+  margin-top: 2rem;
 }
 
-.footer-text {
-  font-family: 'Manrope', sans-serif;
-  font-size: 28px;
-  line-height: 40px;
-  text-align: center;
-  color: #FFFBEB;
-  margin-top: 113.4px; /* 3cm converted to pixels */
+/* Layout Sections */
+.arrow-container,
+.line-container {
+  margin-top: 2rem;
+  height: auto;
 }
 
+/* Positioning and Spacing for Arrow and Zigzag Line */
+.line-container {
+  margin-top: 4rem; /* Added margin-top for better spacing */
+  position: relative; /* Ensures the line is positioned properly within its container */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-@media (max-width: 900px) {
+.waitlist-section input,
+.waitlist-section button {
+  width: 100%;
+  font-size: 1rem;
+}
+
+/* Animations */
+@keyframes jiggle-bounce {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  25% { transform: translateY(5px) rotate(-2deg); }
+  75% { transform: translateY(5px) rotate(2deg); }
+  50% { transform: translateY(10px); }
+}
+
+.animate-jiggle-bounce {
+  animation: jiggle-bounce 2s ease-in-out infinite;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 768px) {
   .headline {
-    font-size: 60px;
-    line-height: 75px;
+    font-size: 10vw;
   }
-  
+
   .subheadline {
-    font-size: 32px;
-    line-height: 44px;
+    font-size: 6vw;
   }
-  
-  .footer-text {
-    font-size: 20px;
-    line-height: 32px;
+
+  .footer {
+    font-size: 1rem;
   }
-}
-
-:root {
-  --lumo-primary: #43C8FF;
-  --lumo-yellow: #FFF04D;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  overflow-x: hidden;
-  font-family: 'Geist', sans-serif;
-  background-color: var(--lumo-primary);
-  color: white;
 }
 
 @layer utilities {
-  .font-gaegu {
-    font-family: 'Gaegu', cursive;
+  @keyframes float-wiggle {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-8px) rotate(-2deg); }
+    75% { transform: translateY(-8px) rotate(2deg); }
+    50% { transform: translateY(-15px) rotate(0deg); }
   }
-  .font-manrope {
-    font-family: 'Manrope', sans-serif;
+
+  @keyframes signature-float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-6px) rotate(-1deg); }
+    75% { transform: translateY(-6px) rotate(1deg); }
+    50% { transform: translateY(-10px) rotate(0deg); }
   }
-}
 
-/* Custom font styles */
-h1, h2, h3, p {
-  font-family: 'Geist', sans-serif;
-  font-weight: 300;
-}
-
-a {
-  color: var(--lumo-yellow);
-  text-decoration: none;
-}
-
-input::placeholder {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-/* Custom animations */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
+  @keyframes jiggle-bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+    25% { transform: translateX(-52%) translateY(5px) rotate(-2deg); }
+    75% { transform: translateX(-48%) translateY(5px) rotate(2deg); }
+    50% { transform: translateX(-50%) translateY(10px) rotate(0deg); }
   }
-  50% {
-    transform: translateY(-10px);
+
+  @keyframes line-wiggle {
+    0%, 100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+    25% { transform: translateX(-51%) translateY(-5px) rotate(-1deg); }
+    75% { transform: translateX(-49%) translateY(-5px) rotate(1deg); }
+    50% { transform: translateX(-50%) translateY(-8px) rotate(0deg); }
   }
+
+  .animate-float-wiggle { animation: float-wiggle 3s ease-in-out infinite; }
+  .animate-signature-float { animation: signature-float 5s ease-in-out infinite; }
+  .animate-jiggle-bounce { animation: jiggle-bounce 2s ease-in-out infinite; }
+  .animate-line-wiggle { animation: line-wiggle 2s ease-in-out infinite; }
 }

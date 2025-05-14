@@ -51,15 +51,19 @@ export default function ReactiveDotBackground() {
       }
     };
 
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth * dpr;
-      canvas.height = window.innerHeight * dpr;
-      canvas.style.width = `${window.innerWidth}px`;
-      canvas.style.height = `${window.innerHeight}px`;
+   const resizeCanvas = () => {
+  // Adjust canvas width and height based on the window size
+  canvas.width = window.innerWidth * dpr;
+  canvas.height = window.innerHeight * dpr;
 
-      // Draw static white grid
-      drawDots(ctx, 0, -9999, -9999);
-    };
+  // Apply width and height to style as well for proper scaling
+  canvas.style.width = `${window.innerWidth}px`;
+  canvas.style.height = `${window.innerHeight}px`;
+
+  // Draw the dots grid with updated canvas size
+  drawDots(ctx, 0, -9999, -9999); // Redraw static white grid on resize
+};
+
 
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);

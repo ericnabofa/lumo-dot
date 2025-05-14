@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
 import Image from 'next/image';
@@ -17,15 +17,15 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({ initialEmail = '' }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isSubmitting) return;
-    
+
     setIsSubmitting(true);
     setShowRipple(true);
-    
+
     // Simulate API call to submit email
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
-      
+
       // Reset submission state after showing success message
       setTimeout(() => {
         setIsSubmitted(false);
@@ -35,7 +35,7 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({ initialEmail = '' }) => {
   };
 
   return (
-    <div className="w-full max-w-md relative">
+    <div className="w-full max-w-[90%] sm:max-w-md relative">
       <form onSubmit={handleSubmit} className="w-full">
         <div className="relative w-full">
           <input
@@ -49,20 +49,20 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({ initialEmail = '' }) => {
             disabled={isSubmitting}
             required
           />
-          
+
           {showRipple && (
             <FormRipple 
               active={showRipple} 
               onAnimationEnd={() => setShowRipple(false)} 
             />
           )}
-          
+
           {isSubmitting && (
             <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
               <div className="w-6 h-6 border-2 border-yellow-300 border-t-transparent rounded-full animate-spin"></div>
             </div>
           )}
-          
+
           {isSubmitted && (
             <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-green-400">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -71,7 +71,7 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({ initialEmail = '' }) => {
             </div>
           )}
         </div>
-        
+
         <div className="flex justify-center mt-4">
           <Image 
             src="/line.svg" 

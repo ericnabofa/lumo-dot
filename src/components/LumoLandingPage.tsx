@@ -1,35 +1,33 @@
 "use client";
 
-import React, { useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import dynamic from 'next/dynamic';
-import WaitlistModal from './WaitlistModal';
-import { useState } from 'react';
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import dynamic from "next/dynamic";
+import WaitlistModal from "./WaitlistModal";
+import useRippleEffect from "../hooks/useRippleEffect";
 
-const WaitlistButton = dynamic(() => import('@/components/WaitlistButton'), {
-  ssr: false
-});
-import useRippleEffect from '../hooks/useRippleEffect';
+const WaitlistButton = dynamic(() => import("@/components/WaitlistButton"), { ssr: false });
 
 const LumoLandingPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   useRippleEffect('.logo-container', 'hover', 5000);
   useRippleEffect('.waitlist-section', 'hover', 4000);
   useRippleEffect('.footer-link', 'hover', 3000);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      const canvas = document.querySelector('canvas');
+      const canvas = document.querySelector("canvas");
       if (canvas) {
         const centerX = window.innerWidth / 2;
         const centerY = window.innerHeight / 2;
-        const clickEvent = new MouseEvent('click', {
+        const clickEvent = new MouseEvent("click", {
           bubbles: true,
           cancelable: true,
           view: window,
           clientX: centerX,
-          clientY: centerY
+          clientY: centerY,
         });
         canvas.dispatchEvent(clickEvent);
       }
@@ -40,19 +38,18 @@ const LumoLandingPage = () => {
   return (
     <>
       <WaitlistModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
       <div
-        className={`main-container flex flex-col items-center justify-center text-white overflow-hidden px-4 py-5 space-y-8 transition-all duration-300 ${isModalOpen ? 'pointer-events-none select-none' : ''
-          }`}
+        className={`main-container flex flex-col items-center justify-start text-white px-4 py-8 min-h-screen overflow-y-auto transition-all duration-300 ${
+          isModalOpen ? "pointer-events-none select-none blur-sm" : ""
+        }`}
         style={{
-          backgroundColor: 'transparent', // ✱ Let the canvas show through
-          filter: isModalOpen ? 'blur(4px)' : 'none',
-          WebkitFilter: isModalOpen ? 'blur(4px)' : 'none',
-          transition: 'filter 0.3s ease, -webkit-filter 0.3s ease'
+          backgroundColor: "transparent",
+          transition: "filter 0.3s ease",
         }}
       >
-
         {/* Logo */}
-        <div className="logo-position exclude-dots">
+        <div className="logo-container mt-4">
           <Image
             src="/logo.svg"
             alt="Lumo Logo"
@@ -64,47 +61,39 @@ const LumoLandingPage = () => {
         </div>
 
         {/* Main heading */}
-        <div className="heading-position headline text-[100px] whitespace-nowrap exclude-dots">
+        <h1 className="headline text-center text-[9vw] sm:text-[64px] md:text-[80px] leading-tight mt-6">
           bringing the toy to <span className="text-[#FFF04D]">life</span>
-        </div>
+        </h1>
 
         {/* Subheading */}
-        <div className="subheading-position subheadline text-[49px] text-center exclude-dots">
+        <p className="subheadline text-center text-[4.5vw] sm:text-[28px] max-w-3xl px-4 mt-4">
           help us bring <span className="text-[#FFF04D]">lumo</span> to life. join our wait list!
-        </div>
+        </p>
 
         {/* Arrow */}
-        <div className="arrow-position exclude-dots">
-          <Image
-            src="/arrow.svg"
-            alt="Down Arrow"
-            width={120}
-            height={420}
-            priority
-          />
+        <div className="arrow-container animate-bounce mt-8">
+          <Image src="/arrow.svg" alt="Down Arrow" width={60} height={200} priority />
         </div>
 
-        <div className="waitlist-position exclude-dots">
+        {/* Waitlist Button */}
+        <div className="waitlist-section w-full max-w-md px-4 mt-6">
           <WaitlistButton onOpen={() => setIsModalOpen(true)} />
         </div>
 
-        {/* Line */}
-        <div className="line-position exclude-dots">
-          <Image
-            src="/line.svg"
-            alt="Vertical Line"
-            width={360}
-            height={1260}
-            priority
-          />
+        {/* Decorative Line */}
+        <div className="line-container animate-jiggle-bounce mt-10">
+          <Image src="/line.svg" alt="Vertical Line" width={200} height={600} priority />
         </div>
 
-        {/* Footer text */}
-        <div className="footer-position exclude-dots">
+        {/* Footer Text */}
+        <footer className="footer-position text-center text-[16px] sm:text-[20px] px-4 max-w-3xl text-[#FFFBEB] leading-relaxed mt-8 mb-12">
           we're building the toy we wish we had as a child
           <br />
-          for more info read our <Link href="/story" className="text-[#FFF04D] hover:underline">story</Link>
-        </div>
+          for more info read our{" "}
+          <Link href="/story" className="text-[#FFF04D] hover:underline">
+            story
+          </Link>
+        </footer>
       </div>
     </>
   );
